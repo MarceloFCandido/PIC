@@ -45,7 +45,7 @@ for i in range(h, U.shape[2], h):
 
     # Plotando as Camadas
     for i in range(0, markers.size / 2):
-        # TODO: Trocar o 15. por uma variavel passada por parametro
+        # TODO: Trocar o 15. por uma variavel passada por parametro (uI.py)
         ax.plot((0., 15.), (markers[i][0], markers[i][1]), '-k')
 
     # Configurando o titulo do grafico e suas legendas

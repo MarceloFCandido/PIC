@@ -157,7 +157,9 @@ class wave2D(object):
         return velocities
 
 # Carregando os dados do arquivo
-data = np.load('data.npy')
+data = np.load('waveConfigs.npy')
+vl   = np.load('velocities.npy')
+it   = np.load('interfaces.npy')
 
 # Criando objeto do tipo wave2D
 #                  Lx      Ly       tMax     Mx       Ny       w
@@ -165,30 +167,7 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
 #     A        Xp       Yp       Tp
     data[6], data[7], data[8], data[9])
 
-# Criando as velocidades e interfaces das camadas
-# TODO: Esses dados devem ser provinientes do introdutor.py
-l0 = velocity(0., .1, 1.1)
-A  = interface( 0.03, 1.5)
-l1 = velocity(0., .2, 2.2)
-B  = interface(-0.05, 3. )
-l2 = velocity(0., .5, 2.2)
-C  = interface(-0.01, 4. )
-l3 = velocity(0., .3, 2.1)
-D  = interface( 0.1 , 6.5)
-l4 = velocity(0., .2, 2.6)
-# l0 = velocity(3., 1.1, 1.1)
-# A  = interface( 0.03, 1.5)
-# l1 = velocity(2., 2.8, 1.2)
-# B  = interface(-0.05, 3. )
-# l2 = velocity(5., 4.5, 1.2)
-# C  = interface(-0.01, 4. )
-# l3 = velocity(4., 3., 1.1)
-# D  = interface( 0.1 , 6.5)
-# l4 = velocity(10., 13.5, 1.3)
-
-# Criando listas de interfaces e velocidades
-interfaces  = [ A,  B,  C,  D    ]
-velocidades = [l0, l1, l2, l3, l4]
+# TODO: Inserir os dados de velocidade e interfaces atraves do userInterface.py
 
 # Recebendo matriz de velocidades
 velocidades = Onda2D.getVelocityMatrix(interfaces, velocidades)

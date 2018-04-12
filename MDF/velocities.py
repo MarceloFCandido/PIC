@@ -21,6 +21,7 @@ ax = fig.add_subplot(111)
 # Formando base para o plot (?)
 [Y, X] = np.meshgrid(Y,X)
 
+# TODO: Os pontos laterais devem ser recebidos atraves do userInterface.py
 markers = np.array([(0., 0.), (1.5, 1.9), (3., 2.3), (4., 3.8), (6.5, 8.)], dtype=(float, 2))
 
 # Invertendo o eixo y

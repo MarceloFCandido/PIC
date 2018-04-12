@@ -131,13 +131,13 @@ class wave2D(object):
         return self.A * np.exp(-termoT) * ((1 - 2 * termoD) * np.exp(-termoD))
 
     def getVelocityMatrix(self, interfaces, velocidades, X, Y):
-        # TODO: Documentar
+        # TODO: Criar docstring da funcao getVelocityMatrix
         # Criando matriz de velocidades
         velocities = np.zeros((int(self.Mx), int(self.Ny)))
 
         # Preenchendo a matriz
         k = 0
-        # TODO: Comentar hard!!!
+        # TODO: Comentar a funcao do getVelocityMatrix
         for i in range(0, int(self.Mx - 1)):
             # Definindo posicao x
             x = X[i]
@@ -170,26 +170,7 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
 #     A        Xp       Yp       Tp
     data[6], data[7], data[8], data[9])
 
-# Criando as velocidades e interfaces das camadas
-# TODO: Esses dados devem ser provinientes do introdutor.py
-l0 = velocity(0., .1, 1.1)
-A  = interface( 0.03, 1.5)
-l1 = velocity(0., .2, 2.2)
-B  = interface(-0.05, 3. )
-l2 = velocity(0., .5, 2.2)
-C  = interface(-0.01, 4. )
-l3 = velocity(0., .3, 2.1)
-D  = interface( 0.1 , 6.5)
-l4 = velocity(0., .2, 2.6)
-# l0 = velocity(3., 1.1, 1.1)
-# A  = interface( 0.03, 1.5)
-# l1 = velocity(2., 2.8, 1.2)
-# B  = interface(-0.05, 3. )
-# l2 = velocity(5., 4.5, 1.2)
-# C  = interface(-0.01, 4. )
-# l3 = velocity(4., 3., 1.1)
-# D  = interface( 0.1 , 6.5)
-# l4 = velocity(10., 13.5, 1.3)
+# TODO: introducao dos dados de velocidade atraves do userInterface.py
 
 # Criando listas de interfaces e velocidades
 interfaces  = [ A,  B,  C,  D    ]
