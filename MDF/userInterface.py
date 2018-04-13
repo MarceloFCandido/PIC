@@ -41,11 +41,10 @@ Tp = input()
 # Criando um array com todos os valores recebidos
 a = np.array([Lx, Ly, tMax, Mx, Ny, w, A, Xp, Yp, Tp])
 
-# TODO: criar o recebimento de dados das velocidades e interfaces
-print "Digite o numero de velocidades/interfaces: "
+print "Digite o numero de interfaces/velocidades (interfaces + 1): "
 N = input()
 
-vl = np.zeros(N, dtype=(float, 3))
+vl = np.zeros(N + 1, dtype=(float, 3))
 it = np.zeros(N, dtype=(float, 2))
 print "ATENCAO! As proximas entradas devem ser separadas por virgula \',\'."
 for i in range(N):
@@ -55,6 +54,9 @@ for i in range(N):
     print "Digite os coeficientes da reta que descreve a interface ", i + 1, \
     ":"
     it[i] = input()
+print "Digite os coeficientes da funcao de velocidade da camada ", N, \
+":"
+vl[N] = input()
 
 # Salvando configuracoes da onda e do meio em arquivos
 np.save('waveConfigs.npy', a)

@@ -5,7 +5,7 @@ Arquivo: openBoundaries.py
 
 Esse programa le o arquivo data.npy que estive na mesma pasta que ele e resolve
 a equacao da onda em um meio bidimensional nao-homogeneo
-(com condicoes de contorno "absorventes" - o domínio e expandido alem do campo
+(com condicoes de contorno "absorventes" - o dominio e expandido alem do campo
 de visao) para os parametros passados pelo arquivo data.npy pelo metodo de
 diferencas finitas
 
@@ -162,7 +162,9 @@ class wave2D(object):
         return velocities
 
 # Carregando os dados do arquivo
-data = np.load('data.npy')
+data = np.load('waveConfigs.npy')
+vl   = np.load('velocities.npy')
+it   = np.load('interfaces.npy')
 
 # Criando objeto do tipo wave2D
 #                  Lx      Ly       tMax     Mx       Ny       w
@@ -170,11 +172,14 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
 #     A        Xp       Yp       Tp
     data[6], data[7], data[8], data[9])
 
-# TODO: introducao dos dados de velocidade atraves do userInterface.py
-
-# Criando listas de interfaces e velocidades
-interfaces  = [ A,  B,  C,  D    ]
-velocidades = [l0, l1, l2, l3, l4]
+# TODO: Organizando dados das interfaces e das velocidades das camadas
+interfaces = []
+velocidades = []
+for i in range(it.shape[0]):
+    interfaces.append(interface(it[i, 0], it[i, 1]))
+    velocidades.append(velocity(vl[i, 0], vl[i, 1], vl[i, 2]))
+velocidades.append(velocity(vl[it.shape[0], 0], vl[it.shape[0], 1],
+vl[it.shape[0], 2]))
 
 # Criando vetores X, Y, T
 X = np.linspace(-Onda2D.Lx / 3, 2 * Onda2D.Lx / 3, Onda2D.Mx)
@@ -204,8 +209,6 @@ j = np.arange(1, int(Onda2D.Ny - 1))
 
 # Criando dx^2
 dx2 = Onda2D.dx * Onda2D.dx
-
-np.savetxt('vel', velocidades)
 
 # Aplicando o MDF
 d = 2 * velocidades[ii, jj]
