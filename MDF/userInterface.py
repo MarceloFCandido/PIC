@@ -44,6 +44,7 @@ a = np.array([Lx, Ly, tMax, Mx, Ny, w, A, Xp, Yp, Tp])
 print "Digite o numero de interfaces/velocidades (interfaces + 1): "
 N = input()
 
+# Recebendo os dados das funcoes de velocidade e das interfaces
 vl = np.zeros(N + 1, dtype=(float, 3))
 it = np.zeros(N, dtype=(float, 2))
 print "ATENCAO! As proximas entradas devem ser separadas por virgula \',\'."

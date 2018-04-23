@@ -16,6 +16,7 @@ Apos resolver a equacao, o arquivo salva os seguintes arquivos binarios:
     V.npy - Velocidades usadas durante o calculo da malha de U.npy
 '''
 
+
 class interface(object):
     '''
         Herda: object
@@ -39,21 +40,23 @@ class interface(object):
         '''
         return self.a * x + self.b
 
+
 class velocity(object):
     '''
         Herda: object
         Define uma velocidade como uma funcao quadratica
     '''
-    def __init__(self, a = 0., b = 0., c = 1.1):
+
+    def __init__(self, a=0., b=0., c=1.1):
         '''
             Definicao de construtor
             Recebe:     a - Termo 'a' da funcao quadratica
                         b - Termo 'b' da funcao quadratica
                         c - Termo 'c' da funcao quadratica
         '''
-        self.a    = a
-        self.b    = b
-        self.c    = c
+        self.a = a
+        self.b = b
+        self.c = c
 
     def getGradientVelocity(self, x, y):
         '''
@@ -74,6 +77,8 @@ class velocity(object):
         return self.getGradientVelocity(x, y)
 
 # Criando a classe que define a onda 2D
+
+
 class wave2D(object):
     '''
         Herda: object
@@ -96,22 +101,22 @@ class wave2D(object):
                         Tp - Tempo do pico do pulso da fonte
         '''
 
-        self.Lx   = 3 * Lx
-        self.Ly   = 3 * Ly
+        self.Lx = 3 * Lx
+        self.Ly = 3 * Ly
         self.tMax = tMax
-        self.Mx   = 3 * Mx
-        self.Ny   = 3 * Ny
-        self.w    = w
-        self.A    = A
-        self.Xp   = Xp
-        self.Yp   = Yp
-        self.Tp   = Tp
-        self.dx   = float(self.Lx) / float (Mx - 1) # Intervalo em x
-        self.dy   = self.dx # Intervalo em y
-        self.dt   = self.dy / 2.0 # Intervalo no tempo
+        self.Mx = 3 * Mx
+        self.Ny = 3 * Ny
+        self.w = w
+        self.A = A
+        self.Xp = Xp
+        self.Yp = Yp
+        self.Tp = Tp
+        self.dx = float(self.Lx) / float(Mx - 1)  # Intervalo em x
+        self.dy = self.dx  # Intervalo em y
+        self.dt = self.dy / 2.0  # Intervalo no tempo
         # Numero de pontos no tempo
-        self.Ot   = int(np.ceil(self.tMax / self.dt)) + 1
-        self.R    = np.power(np.pi, 2) * np.power(self.w, 2)
+        self.Ot = int(np.ceil(self.tMax / self.dt)) + 1
+        self.R = np.power(np.pi, 2) * np.power(self.w, 2)
 
     def evaluateFXYT(self, X, Y, T):
         '''
@@ -124,7 +129,7 @@ class wave2D(object):
         '''
         termoT = self.R * np.power(T-self.Tp, 2)
 
-        D = np.power(X-self.Xp,2) + np.power(Y-self.Yp,2)
+        D = np.power(X-self.Xp, 2) + np.power(Y-self.Yp, 2)
 
         termoD = self.R * D
 
@@ -145,10 +150,10 @@ class wave2D(object):
                 # Definindo posicao y
                 y = Y[j]
                 if x >= 0. and x <= self.Lx / 3:
-                     if y >= 0. and y <= self.Ly / 3:
-                         while y > interfaces[k](x) and k < len(interfaces) - 1:
-                             k += 1
-                         velocities[i, j] = velocidades[k](x, y)
+                    if y >= 0. and y <= self.Ly / 3:
+                        while y > interfaces[k](x) and k < len(interfaces) - 1:
+                            k += 1
+                        velocities[i, j] = velocidades[k](x, y)
                 else:
                     while y > interfaces[k].b and k < len(interfaces) - 1:
                         k += 1
@@ -161,16 +166,17 @@ class wave2D(object):
 
         return velocities
 
+
 # Carregando os dados do arquivo
 data = np.load('waveConfigs.npy')
-vl   = np.load('velocities.npy')
-it   = np.load('interfaces.npy')
+vl = np.load('velocities.npy')
+it = np.load('interfaces.npy')
 
 # Criando objeto do tipo wave2D
 #                  Lx      Ly       tMax     Mx       Ny       w
 Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
-#     A        Xp       Yp       Tp
-    data[6], data[7], data[8], data[9])
+                #     A        Xp       Yp       Tp
+                data[6], data[7], data[8], data[9])
 
 # TODO: Organizando dados das interfaces e das velocidades das camadas
 interfaces = []
@@ -178,8 +184,8 @@ velocidades = []
 for i in range(it.shape[0]):
     interfaces.append(interface(it[i, 0], it[i, 1]))
     velocidades.append(velocity(vl[i, 0], vl[i, 1], vl[i, 2]))
-velocidades.append(velocity(vl[it.shape[0], 0], vl[it.shape[0], 1],
-vl[it.shape[0], 2]))
+velocidades.append(velocity(vl[it.shape[0], 0],
+                            vl[it.shape[0], 1], vl[it.shape[0], 2]))
 
 # Criando vetores X, Y, T
 X = np.linspace(-Onda2D.Lx / 3, 2 * Onda2D.Lx / 3, Onda2D.Mx)
@@ -196,10 +202,10 @@ U = np.zeros((int(Onda2D.Mx), int(Onda2D.Ny), int(Onda2D.Ot)))
 U[:, :, 0:2] = 0.
 
 # Aplicando condicoes de fronteira
-U[                 :,                  0, :] = 0.
-U[int(Onda2D.Mx - 1),                  :, :] = 0.
-U[                 :, int(Onda2D.Ny) - 1, :] = 0.
-U[                 0,                  :, :] = 0.
+U[:,                  0, :] = 0.
+U[int(Onda2D.Mx - 1), :, :] = 0.
+U[:, int(Onda2D.Ny) - 1, :] = 0.
+U[0,                  :, :] = 0.
 
 # Indices para os pontos interiores
 i = np.arange(1, int(Onda2D.Mx - 1))
@@ -214,12 +220,14 @@ dx2 = Onda2D.dx * Onda2D.dx
 d = 2 * velocidades[ii, jj]
 c = 1 / (d * d)
 for k in range(1, Onda2D.Ot - 1):
-    U[ii, jj, k + 1] = c * (Onda2D.evaluateFXYT(X[ii], Y[jj], T[k]) - \
-    4. * U[ii, jj, k] + U[ii - 1, jj, k] + U[ii + 1, jj, k] + \
-    U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
+    U[ii, jj, k + 1] = c * (Onda2D.evaluateFXYT(X[ii], Y[jj], T[k]) -
+                            4. * U[ii, jj, k] + U[ii - 1, jj, k] + U[ii + 1, jj, k] +
+                            U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
 
 # Salvando arrays (um em cada arquivo, exceto o T, para evitar confusao)
+# TODO: em X e Y, salvar apenas a parte que deve aparecer no plot
 np.save('data/X', X)
 np.save('data/Y', Y)
 np.save('data/U', U)
+np.save('data/params', np.array([Onda2D.Lx / 3, Onda2D.Ly / 3]))
 np.save('data/V', velocidades)

@@ -4,3 +4,4 @@ images/
 .e.swp
 vel
 *.npy
+.vscode/
