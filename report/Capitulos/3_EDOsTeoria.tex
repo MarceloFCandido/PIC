@@ -1,0 +1,127 @@
+\chapter{Equações Diferenciais Ordinárias}
+
+    \label{cap:EDOs}
+
+    \section{Definição e Características de Equações Diferenciais}
+    
+        Primeiramente, antes de definir uma equação diferencial ordinária, é necessário se definir e caracterizar uma equação diferencial. As equações diferenciais são, basicamente, aquelas cujas incógnitas são funções (variáveis dependentes) de uma variável independente, podendo envolver também algumas derivadas dessas funções.
+
+        \subsection{A Ordem de uma Equação Diferencial}
+
+            No mundo das equações diferenciais, a \textbf{ordem} da equação é 
+            determinada pela derivada de maior ordem existente na equação. Ou seja, se
+            em uma equação, na qual a incógnita é \(y\), a derivada de maior ordem
+            da função-incógnita é \(y^{(n)}\), então a equação diferencial é de
+            ordem \(n\). Para maior elucidação, temos por exemplo a equação
+            \begin{equation*}
+                y' + 3y = 0
+            \end{equation*}
+            que é dita de primeira ordem, pois a derivada de ordem mais alta, que está
+            na equação, da função \(y\) é \(y'\), de ordem 1. Já no caso da equação
+    
+            \begin{equation*}
+                y'' + 5y = y''' + 3t
+            \end{equation*}
+            a ordem é 3, pois a derivada de \(y\) com ordem mais alta na equação é
+            \(y'''\).
+
+        \subsection{Linearidade}
+
+            Uma equação diferencial é dita \textbf{linear} quando todos os
+            coeficientes que multiplicam as derivadas de \(y\) são funções da(s)
+            variável(eis) independentes $a_{i}(t) \text{, com }i = 0, 1, ..., n$,
+            não sendo essas funções da própria \(y\) ou uma de suas derivadas. Por exemplo:
+            \(... + xy^{(i)} + \cdots\), sendo \(t\) a variável de \(y\). 
+            
+            A equação
+            diferencial ordinária linear geral é
+            \begin{equation}
+                a_{n+1}(t)y^{(n)}(t) + a_{n}(t)y^{(n-1)}(t) + ... + a_{3}(t)y''(t) 
+                + a_{2}(t)y'(t) + a_{1}(t)y(t) + a_{0} = f(t)
+            \end{equation}
+            Qualquer equação que saia desse padrão é dita \textbf{não-linear}.
+
+        \subsection{Solução de uma Equação Diferencial Ordinária}
+
+            Uma função $y(t)$ é dita solução de uma equação diferencial 
+            se ela e suas respectivas derivadas estão definidas em determinado intervalo e 
+            podem ser substituídas na equação sem ocorrer desigualdades \cite{regiIntro}. 
+            Por exemplo, $y(t) = e^t$ é solução de
+            \begin{equation}
+                \label{exSol1}
+                y' - y = 0
+            \end{equation}
+            pois $y'(t) = e^t$ e a subtração entre $y(t)$ e $y'(t)$ leva a um resultado nulo. 
+            Em contrapartida, $y(t) = \cos{t}$ não pode ser solução de (\ref{exSol1}) pois a 
+            função subtraída de sua derivada $y'(t) = -\sin{t}$ não leva a um resultado nulo.
+    
+    
+    \section{A Definição de uma Equação Diferencial Ordinária}
+
+        \label{defEDO}
+        Uma Equação Diferencial Ordinária (EDO) é uma equação como
+        \begin{equation}
+            \label{EDOgeral}
+            a_{n+1}y^{(n)}(t) + a_{n}y^{(n-1)}(t) + \cdots + a_{3}y''(t) + a_{2}y'(t) + a_{1}y(t) + a_{0} = f(t)
+        \end{equation}
+        sendo a função \(y(t)\) e suas derivadas \(y'(t)\), \(y''(t)\), ...,
+        \(y^{(n-1)}(t)\) e \(y^{(n)}(t)\) as incógnitas da equação. Ou seja, a
+        solução dessas equações são funções com \textbf{uma} variável
+        independente (por isso é dita ordinária, se houvessem mais variáveis
+        independentes a equação diferencial seria dita parcial, tipo que será
+        tratado mais a frente) \cite{boyce9, regiIntro}.
+    
+    \section{Sistemas de Equações Diferenciais Lineares}
+    
+        Assim como existem sistemas de equações de $n$-ésimo grau, as equações diferenciais também podem ser agrupadas em sistemas como o abaixo
+        \begin{equation}
+            \begin{cases}
+                y'_1(t) = a_1y_1(t) + b_1y_2(t)\\
+                y'_2(t) = a_2y_2(t) + b_2y_1(t)
+            \end{cases}
+        \end{equation}
+	    Mais a frente serão mostradas aplicações para esse tipo de sistema.
+	        
+    \section{Problema de Valor Inicial (PVI)}
+        \label{PVIsec}
+    
+        Um problema de valor inicial (PVI) é dado por
+        \begin{align}
+            \label{PVIeq}
+            y' = f(t)\\
+            \label{PVIcond}
+            y(t_0) = y_0
+        \end{align}
+        sendo (\ref{PVIeq}) uma equação diferencial ordinária e (\ref{PVIcond}) sua condição inicial, ou seja,
+        como o sistema que (\ref{PVIeq}) descreve se encontrava no instante $t_0$, em geral consideramos que $t$ se 
+        refere a tempo \cite{regiIntro}.
+        
+        Um PVI também pode ser descrito por um sistema de equações diferenciais ordinárias. Nesse caso, devem haver $n$ condições iniciais para cada uma das $n$ equações que formarem o sistema.
+        
+    \section{Problema de Valores de Contorno para Fronteiras com Dois Pontos (PVC)}
+    
+        Considere uma equação diferencial de segunda ordem como
+        \begin{equation}
+            y'' + p(t)y' + q(t)y = g(t)
+        \end{equation}
+        com as seguintes condições iniciais
+        \begin{align}
+            y(\alpha) &= y_0\\
+            y(\beta) &= y_1
+        \end{align}
+        Esse tipo de problema é chamado \textbf{problema de valores de contorno com dois pontos} \cite{boyce9}. Esse tipo de problema costuma ser usado para descrição de situações espaciais em equilíbrio, ou seja, que não variam no tempo.
+        
+        
+    \section{Aplicações das Equações Diferenciais Ordinárias}
+        
+        Por se tratarem de equações envolvendo taxas de variação, as EDO's são muito úteis para descrever situações físicas, químicas e biológicas. Alguns exemplos de situações nas quais esse tipo de equação é utilizado são 
+        \begin{itemize}
+            \item o modelo de crescimento populacional de Malthus;
+            \item o carregamento e o descarregamento de um capacitor;
+            \item a função logística criada por Verhulst;
+            \item as equações presa-predador de Lotka-Volterra;
+            \item os sistemas massa-mola;
+            \item descrições de reações químicas.
+        \end{itemize}
+        
+        Algumas dessas aplicações serão mais detalhadas no Capítulo \ref{cap:aproxPVI}, que também exporá exemplos de como podem ser resolvidas numericamente e os resultados desses exemplos.

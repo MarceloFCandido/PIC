@@ -1,0 +1,138 @@
+\chapter{Equações Diferenciais Parciais e a Equação da Onda}
+
+    \label{cap:EDPs}
+
+    \section{Definição de uma Equação Diferencial Parcial e Alguns Exemplos}
+    
+        \label{EDPdef}
+    
+        Uma equação diferencial parcial (EDP) é baseada numa função como
+        \begin{equation}
+            \label{defMatEDP}
+            f(x_1, x_2, ..., y, \dfrac{dy}{dx_1}, ..., \dfrac{dy}{dx_n}, 
+            \dfrac{d^2y}{dx_1dx_1}, ...,\dfrac{d^2y}{dx_1dx_n}, ...) = c
+        \end{equation}
+        na qual $c$ é uma constante, ou seja, em uma função de $y$ e suas derivadas parciais.
+        Por meio dessa definição podemos perceber, assim como já tinha sido dito na seção \ref{defEDO}, 
+        que uma EDP possui mais de uma variável independente. Uma EDP baseada numa função como \ref{defMatEDP}, mas com $c = 0$, é dita equação diferencial parcial linear \cite{wiki:EDP}. Por exemplo, uma EDP linear de segunda ordem seria na forma \cite{EDPWolfram}
+        \begin{equation}
+            \label{EDPlin2}
+            Ay_{x_1x_1} + By_{x_1x_2} + Cy_{x_2x_2} + Dy_{x_1} + Ey_{x_2} + F = 0
+        \end{equation}
+        
+        Alguns exemplos de EDP's são: 
+        \begin{itemize}
+            \item $u_t = a^2u_{xx}$, a equação unidimensional do calor (sendo $u_t = a^2(u_{xx}+u_{yy})$ a sua versão bidimensional) que determina a distribuição do calor através da(s) dimensão(ões) de um corpo ao longo do tempo;
+            \item $u_{xx} + u_{yy} = 0$, a equação bidimensional de Laplace (sendo $u_{xx} + u_{yy} + u_{zz}+ = 0$ sua versão tridimensional), que serve de modelo para as funções potenciais gravitacionais e elétricas, por exemplo \cite{wiki:LaplaceEq};
+            \item $u_{tt} = a^2u_{xx}$, a equação unidimensional da onda (sendo sua versão bidimensional $u_{tt} = a^2(u_{xx} + u_{yy})$ e a tridimensional, $u_{tt} = a^2(u_{xx} + u_{yy} + u_{zz})$), que descreve o comportamento das ondas das mais variadas naturezas (e que é peça-chave desse projeto) \cite{EDPSodrenotas}.
+        \end{itemize}
+        
+            \subsection{Tipos de Equações Diferencias Parciais}
+        
+                \subsubsection{Equações Diferenciais Parciais Elípticas}
+                
+                    Considerando uma equação como (\ref{EDPlin2}), ela é dita elíptica quando $B^2 - AC < 0$ \cite{wiki:EDP}. Podemos perceber que equações como a de Laplace, citada na seção anterior, que são elípticas, seguem o formado da equação da cônica elipse
+                    \begin{equation*}
+                        \frac{x^2}{a^2} + \frac{y^2}{b^2} = c^2
+                    \end{equation*}
+                    ou da quádrica elipsóide,
+                    \begin{equation*}
+                        \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}= d^2
+                    \end{equation*}
+                    dependendo do número de dimensões consideradas.
+                
+                \subsubsection{Equações Diferenciais Parciais Parabólicas}
+                
+                    Ainda considerando uma equação como (\ref{EDPlin2}), caso $B^2 - AC = 0$, essa equação é do tipo parabólica \cite{wiki:EDP}. Podemos ver que equações como a do calor, apresentada na seção \ref{EDPdef}, tem o mesmo formato que a cônica parábola \cite{wiki:parabola}
+                    \begin{equation*}
+                        y^2 = 4px
+                    \end{equation*}
+                    ou da quádrica parabolóide,
+                    \begin{equation*}
+                        \frac{x^2}{a^2} + \frac{y^2}{b^2} = \frac{z}{c}
+                    \end{equation*}
+                    dependendo do número de dimensões consideradas \cite{wiki:paraboloide}.
+                
+                \subsubsection{Equações Diferenciais Parciais Hiperbólicas}
+        
+                    Mais uma vez considerando a equação (\ref{EDPlin2}), se $B^2 - AC > 0$ então a equação é do tipo hiperbólica, como a equação da onda citada em (\ref{EDPdef}). Assim como as equações anteriores, as EDP's anteriores são similares à equação da cônica hipérbole
+                    \begin{equation}
+                        \frac{x^2}{a^2} - \frac{y^2}{b^2} = c^2
+                    \end{equation}
+                    ou da quádrica hiperboloide,
+                    \begin{equation*}
+                        \frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = d^2
+                    \end{equation*}
+        
+    \section{Resolução de Equações Diferenciais Parciais}
+        
+        As EDP's podem ser resolvidas ou analítica ou 
+        numericamente. Dentre os métodos de resolução analítica encontramos:
+        \begin{itemize}
+            \item separação de variáveis;
+            \item método das características;
+            \item mudança de variáveis;
+        \end{itemize}
+        entre outras opções, que podem ser encontradas em \cite{wiki:EDP}.
+        
+        Contudo, esses métodos nem sempre são suficientes para resolver os problemas 
+        que envolvem as EDP's, sendo necessário então recorrer ao métodos numéricos, entre eles os mais comuns
+        \begin{itemize}
+            \item método das diferenças finitas;
+            \item método dos elementos finitos;
+            \item método dos volumes finitos \cite{wiki:EDP};
+        \end{itemize}
+        dos quais usaremos apenas o primeiro mais a frente. Também utilizaremos, por 
+        trabalharmos com a equação da onda neste projeto, o método de traçamento de raios.
+    
+	\section{A Equação da Onda}
+	    \subsection{Em uma Dimensão Espacial}
+    		A equação da onda é uma equação diferencial parcial hiperbólica que segue o seguinte formato para casos unidimensionais sem fonte de emissão para a onda:
+    		\begin{equation}
+    			\frac{\partial^2 u}{\partial t^2} = \frac{1}{v}\frac{\partial^2 u}{\partial x^2}
+    			\label{eqOnda1Dh}
+    		\end{equation}
+    		e, para casos onde há fonte de emissão da onda:
+    		\begin{equation}	
+    			\frac{\partial^2 u}{\partial t^2} = \frac{1}{v}\frac{\partial^2 u}{\partial x^2} + f(x, t)
+    			\label{eqOnda1Dnh}	
+    		\end{equation}
+    		na qual $v$ representa a velocidade de propagação da onda e $f(x, t)$  é uma função que representa a fonte de emissão da onda.
+    		Essas equações (ou alguma generalização delas) definem o comportamento de uma onda, seja ela de natureza acústica, aquática, 
+    		eletromagnética ou sísmica, por exemplo \cite{boyce9}.
+    		
+    		Durante a modelagem de um problema físico envolvendo a propagação de ondas é necessário, além, claro, da equação da onda, a definição de condições de fronteira (também conhecidas como condições de contorno) e uma condição inicial. Supondo uma corda de comprimento $L$, fixada nos pontos $x = 0$ e $x = L$, tem-se como condições de fronteira
+    		\[u(0, t) = u_{a}\text{, } u(L, t) = u_{b}\]
+    		e como condições iniciais
+    		\[u(x, 0) = f(x)\text{, } 0\le x\le L\text{ para a posição inicial}\]
+    		\[\text{e } u_{t}(x, 0) = g(x)\text{, } 0\le x\le L\text{ para a velocidade inicial}\]
+            Se $u_a = u_b = 0$, por exemplo, temos que a onda refletirá nas bordas do domínio considerado.
+    
+    		A solução $u(x, t)$ da EDP descreve o deslocamento vertical da corda no ponto $x$, em um instante $t$ de tempo \cite{boyce9}.
+		
+	    \subsection{Em duas Dimensões Espaciais}
+	
+	        Imagine uma membrana elástica, como uma membrana de tambor ou até mesmo o tímpano que se encontra no nosso ouvido. Nessa membrana, cada ponto $(x, y)$ está ligado ao seus vizinhos de modo que, se a membrana é excitada ela vibra ou de acordo com a equação
+	        \begin{equation}
+	            \dfrac{\partial^2u}{\partial t^2} = \frac{1}{v}(\dfrac{\partial^2u}{\partial x^2} + \dfrac{\partial^2u}{\partial x^2})
+	        \end{equation}
+	        ou, se a excitação for realizada por uma fonte, pela equação
+	        \begin{equation}
+	            \dfrac{\partial^2u}{\partial t^2} = \frac{1}{v}(\dfrac{\partial^2u}{\partial x^2} + \dfrac{\partial^2u}{\partial x^2}) + f(x, y, t)
+	        \end{equation}
+	        Se tal membrana, ou o meio pelo qual a onda se propaga, for homogêneo, $v$ é constante. Do contrário, $v$ é uma função em $x$ e $y$.
+	        
+	        A ligação de cada ponto $(x, y)$ aos seus vizinhos, de modo que qualquer excitação na membrana gere oscilações por ela, pode ser imaginada como um sistema massa-mola infinito (ou quase infinito). Para isso, basta que assumamos cada ponto como uma massa infinitesimal $m$ e cada ligação como uma pequena mola de constante elástica $k$. As pequenas molas são os elementos que levam à vibração.
+	        
+	        Assim como o caso unidimensional, o modelo da propagação de ondas em meios bidimensionais necessita de uma condição inicial (quando a baqueta toca a membrana de um tambor de uma bateria) e de condições de contorno (a membrana tem seu contorno ligado a um suporte). Podemos definir as condições de contorno como \cite{dailedaWE}
+	        \begin{align}
+	            \label{eq:condContorno}
+	            u(0, y, t) = u(a, y, t) = 0,\ \ \ \ \ \ \ \ 0\le x \le a, \ t \ge 0,\\
+	            u(x, 0, t) = u(x, b, t) = 0,\ \ \ \ \ \ \ \ 0\le y \le b, \ t \ge 0.
+	        \end{align}
+	        e as condições iniciais como
+	        \begin{align}
+	        \label{eq:condIniciais}
+	            u(x, y, 0) &= f(x, y),\\
+	            u_t(x, y, 0) &= g(x, y)
+	        \end{align}

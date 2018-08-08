@@ -1,0 +1,23 @@
+\chapter{Conclusão}
+
+    \label{cap:concl}
+    
+    Para alcançar o objetivo proposto de se comparar os métodos de diferenças finitas e traçamento de raios para a simulação da propagação de ondas em meios não-homogêneos foi necessário o estudo não só dos métodos em si, mas dos assuntos que dão base a eles:
+    \begin{itemize}
+        \item \textbf{Computação numérica}: era necessária a implementação computacional dos métodos numéricos, sendo preciso o entendimento sobre a aritmética computacional e os erros envolvidos em modelagens matemáticas implementadas em computadores;
+        \item \textbf{Equações diferenciais parciais}: a teoria de raios assume o raio como uma EDO, sendo necessário o entendimento sobre esse tipo de equação;
+        \item \textbf{Resolução numérica de problemas de valor inicial}: visto que o raio é, matematicamente, uma EDO e o traçamento de raios é implementado computacionalmente, é necessário se conhecer como se dá a resolução numérica de EDO's, usando-se, por exemplo, o método de Runge-Kutta;
+        \item \textbf{Ondulatória}: para se entender a propagação de ondas é preciso se entender o comportamento delas;
+        \item \textbf{Equações Diferenciais Parciais (e a equação da onda)}: a equação da onda é uma EDP e precisamos entendê-la tanto para aplicar o método de diferenças finitas sobre ela, quanto para entender a teoria dos raios.
+    \end{itemize}
+    
+    A partir daí vimos as ideias dos métodos envolvidos na comparação:
+    \begin{itemize}
+        \item \textbf{Método da diferenças finitas}: modela-se o domínio a ser estudado como uma malha subdividida em retângulos ou paralelepípedos e, para cada ponto dessa malha, aplica-se alguma fórmula (específica para o problema) de diferenças finitas, que são modelagens computacionais para as derivadas;
+        \item \textbf{Traçamento de raios}: ao invés de se modelar toda a frente de onda, separa-se uma fração infinitesimal dela e determina-se a posição e a direção dessa fração dentro de um período de tempo previamente determinado.
+    \end{itemize}
+    Comparando-se as características observadas para cada método, vimos que o traçamento de raios é mais rápido e menos custoso que o método de diferenças finitas, entretanto, a teoria dos raios não é tão intuitiva quando a definição de diferenças finitas.
+    
+    Esse trabalho me possibilitou enxergar aplicações das disciplinas de Cálculo e Física, bem como da programação, no mundo real. Os estudos realizados durante o projeto permitiram a aquisição de novos conhecimentos sobre ondas (sua presença e aplicações em lugares inusitados, como o estudo do interior da Terra), equações diferenciais e na forma como elas podem ser modeladas para resolver problemas nas áreas das Ciências Exatas e Engenharias. Além disso, pude perceber a necessidade da otimização de modelagens numéricas computacionais, para que sejam resolvidas mais rapidamente e com custo menor, dada a sua importância.
+    
+    Por fim, o trabalho pode ser melhorado com, por exemplo, uma análise mais técnica da complexidade e do tempo de execução dos programas envolvidos. Além disso, podem ser estudados alguns instrumentos da Sismologia, como os traços sísmicos ou variações do traçamento de raios, como pode ser visto em \cite{Miqueles2006}. Também pode ser feita a otimização dos programas principais envolvidos, como por programação paralela e com técnicas de computação de alto desempenho.

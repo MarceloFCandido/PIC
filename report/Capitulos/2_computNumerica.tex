@@ -1,0 +1,57 @@
+\chapter{Uma Breve Introdução à Computação Científica}
+
+    \label{cap:cientComp}
+
+    A computação científica visa a resolução de problemas físicos, matemáticos, químicos, biológicos 
+    ou de outra área da ciência utilizando-se o Cálculo Numérico executado por computadores. Essas resoluções
+    são de cunho numérico (ou seja, não são analíticas) e obtidas através da elaboração e execução de algoritmos
+    que modelam o problema a ser estudado. Esses algoritmos são executados por computadores e se baseiam em 
+    operações aritméticas e lógicas, que são as únicas que um computador pode realizar \cite{fred}.
+
+    \section{Soluções de Problemas}
+    
+        Segundo Campos \cite{fred}, a resolução de problemas se dá por meio de quatro etapas:
+        \begin{enumerate}
+            \item \textbf{definição do problema}: determina-se qual o problema a ser resolvido;
+            \item \textbf{modelagem matemática}: obtém-se o modelo matemático do problema real por meio
+            de uma formulação matemática;
+            \item \textbf{solução numérica}: determina-se qual o método numérico a ser 
+            utilizado para a resolução do problema modelado matemático. Implementa-se o método na forma de uma algoritmo, que, 
+            após ser codificado em um programa, deve ser executado por um computador;
+            \item \textbf{análise dos resultados}: avalia-se se a solução obtida é satisfatória para o problema. Caso 
+            contrário, modela-se novamente o problema através de uma nova formulação matemática a fim de se 
+            obter uma nova solução numérica.
+        \end{enumerate}
+    
+    \section{Aritmética Computacional}
+    
+        Tudo o que um computador consegue entender são \textit{strings} (cadeias de caracteres) de zeros e uns. Cada um dos dos componentes dessas \textit{strings} é conhecido por \textit{bit}, que também pode ser definido como um dígito \textbf{binário}. Toda a matemática que um computador consegue realizar é baseada nessa representação. Por conta disso, um computador consegue representar a forma exata de alguns números racionais. Entretanto, os demais números são representados por aproximações. Como sabemos, a maior parte dos números desse tipo tem casas decimais e, para serem representados computacionalmente, precisam seguir um padrão específico \cite{burden}.
+        
+        Em 1985, o Instituto de Engenheiros Eletricistas e Eletrônicos (IEEE, em inglês) adotou o padrão técnico IEEE-754 para ponto flutuante, que é a forma pela qual um computador consegue representar números com casas decimais. Muitos fabricantes de microprocessadores adotaram esse padrão, que define um ponto flutuante como um ``real longo'' de 64 \textit{bits} na forma 
+        \begin{equation*}
+            (-1)^s\cdot 2^{c - 1023}(1 - f)
+        \end{equation*}
+        na qual $s$ é um indicador de sinal, $c$ é um expoente chamado de ``característica'' e $f$ é uma fração binária que recebe o nome de ``mantissa''. Na \text{string} de 64 \textit{bits}, $s$ recebe um \textit{bit}, $c$ recebe 11 e $f$ recebe 54 \textit{bits} \cite{burden}.
+    
+        O uso desse formato para a representação de números leva a erros de arredondamento em cálculos computacionais caso um dos números envolvidos nos cálculos não seja uma potência de dois. Isso ocorre por conta da representação numérica da máquina ser finita, o que leva a aproximações numéricas. Esse erro deve ser controlado para que não interfiram significativamente nos resultados dos cálculos \cite{burden, fred}.
+        
+    \section{Tipos de Erros Envolvidos na Solução de Problemas}
+    
+        Também segundo Campos \cite{fred}, existem pelo menos três tipos de erros que podem ser encontrados na solução de problemas (excetuando-se os erros grosseiros referidos pelo autor). São eles:
+        \begin{enumerate}
+            \item \textbf{erro de arredondamento e/ou truncamento}: a transformação de um número em seu correspondente em ponto flutuante pode se dar por 
+            \begin{itemize}
+                \item \textbf{arredondamento}: seja uma máquina com suporte a números de $k$ algarismos. Se ela receber um número $i$ de $k + n$ algarismos e o $(k + 1)$-ésimo algarismo for maior ou igual a $5$, soma-se $1$ ao $k$-ésimo algarismo e corta-se (trunca-se) os $n$ últimos algarismos de $i$. Caso o $(k + 1)$-ésimo algarismo for menor que $5$, realiza-se apenas o truncamento;
+                \item \textbf{truncamento}: ainda considerando uma máquina como a do caso anterior, se ela receber um número $i$ de $k + n$ algarismos, ela truncará os últimos $n$ algarismos de $i$ \cite{burden};
+            \end{itemize}
+            \item \textbf{erro absoluto e erro relativo}: o erro absoluto é medido por \begin{equation}
+                e_{\text{abs}} = v_{\text{real}} - v_{\text{aprox.}}
+            \end{equation}
+            onde $e_{\text{abs}}$ é o erro absoluto, $v_{\text{real}}$ é o valor real e $v_{\text{aprox.}}$ é o valor aproximado. Já o erro relativo é dado por
+            \begin{equation}
+                e_{\text{rel}} = \dfrac{v_{\text{real}} - v_{\text{aprox.}}}{v_{\text{real}}}
+            \end{equation}
+            onde $e_{\text{rel}}$ é o erro relativo, $v_{\text{real}}$ é o valor real e $v_{\text{aprox.}}$ é o valor aproximado \cite{fred}.
+            \item \textbf{erro na modelagem}: em alguns problemas, é necessária a criação de uma expressão matemática na etapa de modelagem. Essa expressão é criada a partir de dados experimentais, que podem não estar próximos o bastante do problema real e, dessa forma, interferirem significativamente nos resultados. Com isso, torna-se necessária uma nova modelagem \cite{fred};
+        \end{enumerate}
+    

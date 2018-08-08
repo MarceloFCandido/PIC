@@ -1,0 +1,161 @@
+\chapter{Sequências e Séries Infinitas}
+
+    \todo[inline]{Ligar os pontos nesse capítulo}
+    Este capítulo visa apresentar um breve resumo baseado em \cite{stewart} sobre Sequências e Séries Infinitas, assunto importante para se entender como se pode aproximar uma função $f(x)$ usando-se um computador e como exemplo do porque ocorrem os erros de truncamento.
+    
+    \todo[inline]{Verificar se de fato se tratam de erros de truncamento.}
+
+	\section{Sequências}
+	
+		\begin{itemize}
+			
+			\item Uma sequência pode ser definida como uma coleção de números organizados em uma determinada ordem. No caso das sequências infinitas, logicamente, não tem fim.
+			
+			\item As sequências como $\{a_{1}, a_{2}, a_{3}, ...\}$ recebem por notação
+			$\{a_{n}\}$  ou  $\{a_{n}\}^{\infty}_{n = 1}$.
+			
+			\item Caso uma sequência possa ter seus termos $a_{n}$ tão próximos de um número $L$ quando $n$ é grande o bastante, podemos dizer que tal sequência possui um limite $\lim_{n\rightarrow \infty} a_{n} = L$, que, caso exista, é dito que a sequência é \textbf{convergente}, do contrário, a sequência é \textbf{divergente}.
+			
+			\item \textbf{Teorema: }Caso o limite $\lim_{n\rightarrow \infty} a_{n} = L$ e caso a função $f$ for contínua em $L$, então podemos afirmar que $\lim_{n\rightarrow  \infty} f(a_{n}) = {f(L)}$.
+			
+			\item Uma sequência pode ser classificada em \textbf{crescente} caso o sucessor de qualquer número dentro de um intervalo da sequência seja maior do que ele. Já quando o sucessor de um número da sequência é menor do que ele, diz-se que a sequência é \textbf{decrescente}. Caso ela se mantenha crescente ou decrescente, diz-se que ela é \textbf{monótona}.
+			
+			\item Uma sequência pode ter um limite superior em um valor $S$ caso seu $n$-ésimo termo não seja maior que $S$. Na negativa, uma sequência pode ter um limite inferior em um valor $i$ caso seu $n$-ésimo termo não seja menor que $i$. Caso uma sequência possua limites superior e inferior diz-se que ela é uma sequência \textbf{limitada}.
+			
+			\item \textbf{Teorema da Sequência Monótona: }caso uma sequência seja crescente ou decrescente e se possuir limite superior e inferior, ou seja, for uma sequência limitada, diz-se que essa é convergente.
+				
+		\end{itemize}
+	
+	\section{Séries}
+		
+		\begin{itemize}
+			
+			\item O somatório $\sum_{n = 1}^{\infty} a_{n}$ define uma \textbf{série infinita} (ou série) cuja representação por extenso é dada por $a_{1} + a_{2} + a_{3} + a_{4} + ... + a_{n} + ...$.
+			
+			\item Qualquer número pode ser representado por uma soma infinita.
+			
+			\item Uma \textbf{soma parcial} $s_{n}$ de uma série infinita $\sum_{n = 1}^{\infty} a_{n}$ é definida como o somatório $\sum_{i=1}^{n} a_{i}$. Caso a sequência $\{s_{n}\}$ seja convergente e o $\lim_{n\rightarrow  \infty} s_{n} = s$, sendo $s$ um número real, então a série infinita é dita \textbf{convergente} e $s$ é dito como \textbf{soma} dessa série. A série é dita \textbf{divergente} caso a sequência $\{s_{n}\}$ for divergente.
+			
+			\item Se uma série infinita for convergente, então $\lim_{n\rightarrow  \infty} a_{n} = 0$. Entretanto, caso esse limite não exista ou for diferente de 0, tal série é divergente.
+			
+			\item Algumas propriedades das séries infinitas:
+			
+			\begin{enumerate}
+				\item $\sum_{n=1}^{\infty} ca_{n}$ = $c\sum_{n=1}^{\infty} a_{n}$;
+				
+				\item $\sum_{n=1}^{\infty} (a_{n} + b_{n})$ = $\sum_{n=1}^{\infty} a_{n} + \sum_{n=1}^{\infty} b_{n}$
+				
+				\item $\sum_{n=1}^{\infty} (a_{n} - b_{n})$ = $\sum_{n=1}^{\infty} a_{n} - \sum_{n=1}^{\infty} b_{n}$
+			\end{enumerate}
+			
+		\end{itemize}
+	
+	\section{Séries alternadas}
+	
+		\begin{itemize}
+			
+			\item Séries alternadas são somas infinitas de números cujos sinais se alternam.
+			
+			\item Um exemplo de série alternada é: $1 - 2 + 3 - 4 + 5 - 6 + ... = \sum_{n=1}^{\infty} (-1)^{n-1}n$.
+			
+			\item \textbf{Teste da Série Alternada: }se em uma série alternada, os termos que imediatamente sucedem os outros na soma forem menores que esses ($a_{n + 1} \le a_{n}, \forall  n$) e o $n$-ésimo termo da soma tender a 0 quando $n$ tende ao infinito, então diz-se que essa série é convergente.
+			
+			\item É possível se aproximar o valor de uma série alternada convergente por meio de somas parciais. Contudo, essa aproximação possui um erro equivalente a soma parcial subtraída da soma total. Tal erro é menor ou igual ao primeiro termo ignorado da série.
+			
+		\end{itemize}
+	
+	\section{Convergência Absoluta e os Testes da Razão e da Raiz}
+	
+		\subsection{Convergência Absoluta}
+	
+			\begin{itemize}
+				
+				\item Seja uma série infinita definida por $\sum_{n = 1}^{\infty} a_{n}$ que possui como correspondência a série $\sum_{n = 1}^{\infty} |a_{n}|$, que é a soma infinita dos módulos dos termos da série idealizada inicialmente. Se a segunda for convergente, a primeira é chamada \textbf{absolutamente convergente}.
+				
+				\item Se uma série infinita é convergente, mas não absolutamente convergente é então chamada \textbf{condicionalmente convergente}.
+				
+			\end{itemize}
+	
+		\subsection{O Teste da Razão}
+		
+			\begin{itemize}
+				
+				\item Uma série infinita $\sum_{n = 1}^{\infty} a_{n}$ pode ser absolutamente convergente caso $\lim_{n\rightarrow  \infty} |\frac{a_{n+1}}{a_{n}}| = L$ e $L < 1$. Entretanto, se $L > 1$, então a série é divergente.
+				
+				\item Caso o limite referido anteriormente seja igual a 1, não se pode concluir nada sobre a convergência ou divergência da série.	
+				
+			\end{itemize}
+		
+		\subsection{O Teste da Raiz}
+			
+			\begin{itemize}
+				
+				\item Uma série infinita $\sum_{n = 1}^{\infty} a_{n}$ pode ser absolutamente convergente caso $\lim_{n\rightarrow  \infty} \sqrt[n]{|a_{n}|} = L$ e $L < 1$. Caso $L > 1$ ou $\lim_{n\rightarrow  \infty} \sqrt[n]{|a_{n}|} = \infty$, a série em questão é divergente.
+				
+				\item Se o limite referido anteriormente for igual a 1, não se pode obter conclusão do Teste.
+				
+			\end{itemize}
+		
+		\subsection{Rearranjos}
+		
+			\begin{itemize}
+				
+				\item O matemático Riemann demonstrou que caso uma série infinita $\sum_{n = 1}^{\infty} a_{n}$ seja uma série condicionalmente convergente e $r$ for um número qualquer dentro dos reais, então existe um rearranjo dessa série que leva a uma soma igual a $r$.
+				
+			\end{itemize}
+		
+	\section{Séries de Potências}
+	
+		\begin{itemize}
+			
+			\item Uma série $\sum_{n=0}^{\infty} k_{n}x_{n}$ é referida como \textbf{série de potências}, na qual $k_{n}$ são constantes denominadas \textbf{coeficientes} da série. Esse tipo de série pode convergir para alguns valores de $x$ e divergir para outros e seu formato de somas de potências de $x$ a assemelha a um polinômio.
+			
+			\item Outro exemplo de série de potências é $\sum_{n=0}^{\infty} k_{n}(x - c)^{n}$, semelhante ao anterior, apenas deslocado $c$ unidades em $x$. Para tal série existem três possibilidades:
+			
+			\begin{enumerate}
+				
+				\item Ou a série converge somente quando $x = c$;
+				
+				\item ou ela converge para todo $x$;
+				
+				\item ou existe um número real R (denominado \textbf{raio de convergência}) para o qual a série converge se $R > |x - c|$ e diverge se $R < |x - c|$.
+				
+			\end{enumerate}
+			
+			\item Tais séries são definidas como funções cujo domínio (denominado por \textbf{intervalo de convergência}) é representado por todos os valores em $x$ para os quais a série converge. 
+			
+		\end{itemize}
+	
+	\section{Representações de Funções como Séries de Potências}
+	    \todo[inline]{Afirmar e evidenciar que qualquer função pode ser representada por uma série de potências.}
+		\begin{itemize}
+			
+		\item Em certos casos, pode ser útil derivar e integrar funções como a série de potências $\sum_{n=0}^{\infty} k_{n}(x - c)^{n}$, vista na seção anterior. Tal série é uma soma infinita de polinômios em $x$ e, dessa forma, tanto a derivação quanto a integração poderia ser realizada para cada parcela da série.
+		
+		\item Com isso, sendo $f(x) = \sum_{n=0}^{\infty} k_{n}(x - c)^{n}$, então
+			\begin{equation}
+				f'(x) = \sum_{n = 1}^{\infty} nk_{n}(x - c)^{n - 1}
+			\end{equation} e
+			\begin{equation}
+				\int f(x) dx = K + \sum_{n = 0}^{\infty} k_{n} \frac{(x - c)^{n + 1}}{n + 1}.
+			\end{equation}
+			
+		\end{itemize}
+	
+	\section{Séries de Taylor e Maclaurin}
+	    \label{TayMacSec}
+	
+		\begin{itemize}
+			
+			\item Considerando uma função $f(x) = \sum_{n=0}^{\infty} k_{n}(x - c)^{n}$ com $R > |x- c|$, pode-se dizer que os coeficientes dessa série são dados por $k_{n} = \frac{f^{(n)}(c)}{n!}$.
+			
+			\item A série $\sum_{n=0}^{\infty} \frac{f^{(n)}(c)}{n!}(x - c)^{n}$ é conhecida por \textbf{série de Taylor} da função $f$ em $c$. Quando $c = 0$, tem-se $\sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}(x)^{n}$, conhecida por \textbf{série de Maclaurin}.
+			
+			\item Como em uma soma parcial, uma série de Taylor pode ser definida até uma $n$-ésima parcela:
+				\begin{equation}
+				\label{TayPol}
+					T_{n}(x) = \sum_{j=0}^{n} \frac{f^{(j)}(c)}{j!}(x - c)^{j}.
+				\end{equation}
+			Com isso, o restante da soma total é definido por $R_{n}(x)$, que é igual a $f(x) - T_{n}(x)$. Quanto maior o número de parcelas em $T_{n}$, menor é $R_{n}$.
+			
+		\end{itemize}
