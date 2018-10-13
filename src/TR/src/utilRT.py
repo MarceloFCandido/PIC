@@ -154,7 +154,7 @@ def plot(rays, dimX, pontosLaterais):
 
     # Salvando a imagem
     # Definindo caminho da plotagem
-    caminho = 'TR.png'
+    caminho = 'images/TR.png'
     plt.savefig(caminho)
 
 def projVetorial(v, u):
