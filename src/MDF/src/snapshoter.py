@@ -72,7 +72,7 @@ for i in range(h, U.shape[2], h):
     titulo = "Teste 0%d - MDF - 1D" % counter
 
     # Definindo caminho da plotagem
-    caminho = '../images/Teste0%d.png' % counter
+    caminho = '../images/{caminho}/Teste0%d.png'.format(caminho=camh) % counter
 
     # Incrementando o contador
     counter += 1
