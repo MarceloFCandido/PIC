@@ -157,9 +157,9 @@ class wave2D(object):
         return velocities
 
 # Carregando os dados do arquivo
-data = np.load('waveConfigs.npy')
-vl   = np.load('velocities.npy')
-it   = np.load('interfaces.npy')
+data = np.load('../data/configs/waveConfigs.npy')
+vl   = np.load('../data/configs/velocities.npy')
+it   = np.load('../data/configs/interfaces.npy')
 
 # Criando objeto do tipo wave2D
 #                  Lx      Ly       tMax     Mx       Ny       w
@@ -214,7 +214,7 @@ for k in range(1, Onda2D.Ot - 1):
     U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
 
 # Salvando arrays (um em cada arquivo, exceto o T, para evitar confusao)
-np.save('data/X', X)
-np.save('data/Y', Y)
-np.save('data/U', U)
-np.save('data/V', velocidades)
+np.save('../data/outputs/X', X)
+np.save('../data/outputs/Y', Y)
+np.save('../data/outputs/V', velocidades)
+np.save('../data/outputs/U', U)

@@ -5,9 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Carregando arrays a partir de arquivos
-X = np.load('data/X.npy')
-Y = np.load('data/Y.npy')
-V = np.load('data/V.npy')
+X = np.load('../data/configs/X.npy')
+Y = np.load('../data/configs/Y.npy')
+V = np.load('../data/configs/V.npy')
 
 # Criando figura
 fig = plt.figure()
@@ -45,7 +45,7 @@ for i in range(0, markers.size / 2):
 ax.set(title='Velocidades', ylabel='Y', xlabel='X')
 
 # Definindo caminho da plotagem
-caminho = 'images/Velocidades.png'
+caminho = '../images/Velocidades.png'
 
 # Salvando a imagem
 plt.savefig(caminho)

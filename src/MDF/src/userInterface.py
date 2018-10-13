@@ -60,6 +60,6 @@ print "Digite os coeficientes da funcao de velocidade da camada ", N, \
 vl[N] = input()
 
 # Salvando configuracoes da onda e do meio em arquivos
-np.save('waveConfigs.npy', a)
-np.save('velocities.npy', vl)
-np.save('interfaces.npy', it)
+np.save('../data/configs/waveConfigs.npy', a)
+np.save('../data/configs/velocities.npy', vl)
+np.save('../data/configs/interfaces.npy', it)

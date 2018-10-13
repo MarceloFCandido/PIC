@@ -4,11 +4,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+print "Qual voce deseja plotar:\n 1 - C/ reflexao \n 2 - C/ fronteiras abertas?"
+caminhoEscolhido = input()
+camh = 'open'
+if (caminhoEscolhido == 1):
+    camh = 'reflect'
+elif (caminhoEscolhido == 2):
+    camh = 'open'
+else:
+    print 'Opcao inexistente'
+    exit()
+
 # Carregando arrays a partir de arquivos
-X = np.load('data/X.npy')
-Y = np.load('data/Y.npy')
-U = np.load('data/U.npy')
-params = np.load('data/params.npy')
+X = np.load('../data/{caminho}/X.npy'.format(caminho=camh))
+Y = np.load('../data/{caminho}/Y.npy'.format(caminho=camh))
+U = np.load('../data/{caminho}/U.npy'.format(caminho=camh))
+params = np.load('../data/configs/params.npy')
 
 print "Quantos snapshots voce deseja?"
 N = input()
@@ -61,7 +72,7 @@ for i in range(h, U.shape[2], h):
     titulo = "Teste 0%d - MDF - 1D" % counter
 
     # Definindo caminho da plotagem
-    caminho = 'images/Teste0%d.png' % counter
+    caminho = '../images/Teste0%d.png' % counter
 
     # Incrementando o contador
     counter += 1
