@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def userInput():
-    '''
+    """
         Funcao que recebe as entradas do usuario
         Retorna:        dimension - array com as dimensoes do meio
                         posY - posicao em y da fonte
@@ -18,7 +18,7 @@ def userInput():
                         tMax - tempo maximo que os raios podem permanecer em
                                uma camada
                         refletora - camada onde os raios devem refletir
-    '''
+    """
     print "Seja bem-vindo ao tracador de raios!"
     print ""
     print "OBS: muitas entradas aqui serao em ponto flutuante"
@@ -63,7 +63,7 @@ def userInput():
 
 def buildMedium(dimension, posY, nLayers, nRays, angMin, angMax, lateralPoints,
                 velocidades):
-    '''
+    """
         Funcao que constroi o meio em que os raios propagarao
         Recebe:         dimension - dimensoes do meio
                         posY - posicao y da fonte
@@ -77,7 +77,7 @@ def buildMedium(dimension, posY, nLayers, nRays, angMin, angMax, lateralPoints,
                         velocidades - array contendo os coeficientes dos modelos
                                       de velocidades das interfaces
         Retorna:        m - objeto medium
-    '''
+    """
     # Criando camadas
     layers = []
     for i in range(0, nLayers):
@@ -98,37 +98,37 @@ def buildMedium(dimension, posY, nLayers, nRays, angMin, angMax, lateralPoints,
     return m
 
 def deprecated_somaEspessuras(l, k):
-    '''
+    """
         Soma as espessuras das camadas passadas por parametro ate a camada k
-    '''
+    """
     summ = 0.
     for i in range(0, k):
         summ += l[i].espessura
     return summ
 
 def degreesToRadians(angle):
-    '''
+    """
         Funcao que retorna um angulo passado em graus, por parametro, convertido
         para radianos
-    '''
+    """
     return angle * np.pi / 180
 
 def radiansToDegrees(angle):
-    '''
+    """
         Funcao que retorna um angulo passado em radianos, por parametro, conver-
         tido para graus
-    '''
+    """
     return angle * 180 / np.pi
 
 def plot(rays, dimX, pontosLaterais):
-    '''
+    """
         Metodo que realiza e salva a plotagem dos raios propagando pelo meio.
         Recebe:         rays - lista de raios, que possuem os pontos a serem
                                plotados
                         dimX - dimensao do meio em x
                         pontosLaterais - pontos usados para auxiliar a exibicao
                                          das interfaces
-    '''
+    """
     # Criando figura
     fig = plt.figure()
 
@@ -158,12 +158,12 @@ def plot(rays, dimX, pontosLaterais):
     plt.savefig(caminho)
 
 def projVetorial(v, u):
-    '''
+    """
         Funcao que retorna a projecao vetorial do vetor v sobre o vetor u
         Recebe:         v - array que representa o vetor a ser projetado
                         u - array que representa o vetor que recebera a projecao
         Retorna:        a projecao vetorial de v sobre u
-    '''
+    """
     num = v.dot(u)
     den = u.dot(u)
     return num / den * u

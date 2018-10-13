@@ -1,10 +1,10 @@
 
-'''
+"""
     Arquivo: RTscript.py
     Programa central do tracamento de raios. Recebe os parametros do tracamento
     pela entrada do usuario e aplica as acoes necessarias para que o tracamento
     ocorra, utilizando os demais arquivos como acessorios
-'''
+"""
 
 from classesRT import ray, source, layer, medium
 from methodsRT import refract, reflect, go

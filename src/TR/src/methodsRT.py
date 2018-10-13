@@ -3,14 +3,14 @@ from rungeKutta import rungeKutta4Ordem as RK4
 import numpy                            as np
 
 def refract(i, v1, v2, r, s):
-    '''
+    """
         Procedimento que realiza a refracao do raio
         i   - objeto interface
         v1  - objeto velocidade da camada 1
         v2  - objeto velocidade da camada 2
         r   - objeto ray
         s   - sentido do raio (descendo ou subindo)
-    '''
+    """
     # Vetor direcao atual do raio
     XY = np.array([r.XP[0, -1], r.XP[1, -1]])
     P  = np.array(r.XP[2, -1], r.XP[3, -1])
@@ -36,17 +36,17 @@ def refract(i, v1, v2, r, s):
     r.XP[2, -1], r.XP[3, -1] = P
 
 def reflect(i, r):
-    '''
+    """
         Procedimento que realiza a reflexao do raio
         i - objeto interface
         r - objeto ray
-    '''
+    """
     P        = np.array([r.XP[2, -1], r.XP[3, -1]])
     S        = projVetorial(P, i.vNormal)
     r.XP[2, -1], r.XP[3, -1] = P - 2 * S
 
 def go(v, i, r, s, dimX, tMax):
-    '''
+    """
         Procedimento que calcula o prosseguimento do raio
         v    - objeto velocity
         i    - objeto interface
@@ -54,7 +54,7 @@ def go(v, i, r, s, dimX, tMax):
         s    - sentido do raio (descendo ou subindo)
         dimX - dimensao em X do meio
         tMax - tempo maximo que um raio pode permanecer em uma camada
-    '''
+    """
     # Usando o rungeKutta
     # O tempo maximo deve ser o tempo atual + tMax
     tMax     = r.time[-1] + tMax

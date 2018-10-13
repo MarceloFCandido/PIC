@@ -3,7 +3,7 @@ import numpy as np
 
 # --------------------- Funcoes auxiliares ao Runge-Kutta -------------------- #
 def didItTouchTheInterface(x, y, _i, s):
-    '''
+    """
         Funcao que determina se o raio ainda esta na camada atual
         Recebe:         (x, y) - ponto atual do raio
                         _i     - proxima interface
@@ -16,7 +16,7 @@ def didItTouchTheInterface(x, y, _i, s):
                         Caso ele esteja subindo pelo meio e seu y for menor que
                         o y calculado para o x do raio na interface, entao o
                         raio ultrapassou a interface
-    '''
+    """
     if s == 1:
         if y > _i(x):
             return 1
@@ -30,7 +30,7 @@ def didItTouchTheInterface(x, y, _i, s):
 # ---------------------------------------------------------------------------- #
 
 def rungeKutta4Ordem(EDO, tMax, h, To, Yo, paramRK = 0):
-    '''
+    """
         Funcao que implementa o metodo de Runge-Kutta de quarta ordem (RK4)
         Recebe:         EDO     - edos a serem resolvidas numericamente pelo RK4
                         tMax    - final do intervalo I de tempo para o qual a
@@ -44,7 +44,7 @@ def rungeKutta4Ordem(EDO, tMax, h, To, Yo, paramRK = 0):
                                   tempo durante a execucao do RK4
                         Y       - Valores das equacoes calculados para cada pas-
                                   so dado pelo RK4
-    '''
+    """
     # Variavel para indexacao dos vetores
     i = 0
 
