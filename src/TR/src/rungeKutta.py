@@ -48,7 +48,7 @@ def rungeKutta4Ordem(EDO, tMax, h, To, Yo, paramRK = 0):
     # Variavel para indexacao dos vetores
     i = 0
 
-    # Determinando o passo
+    # Determinando o numero de passos
     N = int(tMax / h)
 
     # Recebe o numero de equacoes a serem resolvidas pelo metodo
