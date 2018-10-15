@@ -171,7 +171,9 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
 #     A        Xp       Yp       Tp
     data[6], data[7], data[8], data[9])
 
-
+markers = np.zeros(len(interfaces), dtype=(float, 2))
+for i in range(len(interfaces)):
+    markers[i][:] = (interfaces[i].b, interfaces[i](Onda2D.Lx / 3))
 
 # Organizando dados das interfaces e das velocidades das camadas
 interfaces = []
@@ -231,3 +233,5 @@ np.save('../data/outputs/reflect/X', X)
 np.save('../data/outputs/reflect/Y', Y)
 np.save('../data/outputs/reflect/V', velocidades)
 np.save('../data/outputs/reflect/U', U)
+np.save('../data/configs/params', np.array([Onda2D.Lx, Onda2D.Ly]))
+np.save('../data/configs/markers', markers)

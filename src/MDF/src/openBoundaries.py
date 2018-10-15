@@ -147,7 +147,7 @@ class wave2D(object):
                 # Definindo posicao y
                 y = Y[j]
                 if x >= 0. and x <= self.Lx / 3:
-                    if y >= 0. and y <= self.Ly / 3:
+                    if y >= 0.:
                         while y > interfaces[k](x) and k < len(interfaces) - 1:
                             k += 1
                         velocities[i, j] = velocidades[k](x, y)
@@ -158,11 +158,10 @@ class wave2D(object):
                 # Para garantir que nao haja divisao por zero
                 if velocities[i, j] >= -.00005 and velocities[i, j] <= .00005:
                     media = np.mean(velocities[i, :j + 2])
-                    velocities[i, j] = 1.
+                    velocities[i, j] = media
                 k = 0
 
         return velocities
-
 
 # Carregando os dados do arquivo
 data = np.load('../data/configs/waveConfigs.npy')
@@ -183,6 +182,10 @@ for i in range(it.shape[0]):
     velocidades.append(velocity(vl[i, 0], vl[i, 1], vl[i, 2]))
 velocidades.append(velocity(vl[it.shape[0], 0],
                             vl[it.shape[0], 1], vl[it.shape[0], 2]))
+
+markers = np.zeros(len(interfaces), dtype=(float, 2))
+for i in range(len(interfaces)):
+    markers[i][:] = (interfaces[i].b, interfaces[i](Onda2D.Lx / 3))
 
 # Criando vetores X, Y, T
 X = np.linspace(-Onda2D.Lx / 3, 2 * Onda2D.Lx / 3, Onda2D.Mx)
@@ -228,10 +231,11 @@ for k in range(1, Onda2D.Ot - 1):
     4. * U[ii, jj, k] + U[ii - 1, jj, k] + U[ii + 1, jj, k] + \
     U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
 
+
 # Salvando arrays (um em cada arquivo, exceto o T, para evitar confusao)
-# TODO: em X e Y, salvar apenas a parte que deve aparecer no plot
 np.save('../data/outputs/open/X', X)
 np.save('../data/outputs/open/Y', Y)
 np.save('../data/outputs/open/U', U)
 np.save('../data/outputs/open/V', velocidades)
 np.save('../data/configs/params', np.array([Onda2D.Lx / 3, Onda2D.Ly / 3]))
+np.save('../data/configs/markers', markers)
