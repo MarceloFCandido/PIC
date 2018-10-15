@@ -1,6 +1,6 @@
 import numpy as np
 
-'''
+"""
 Arquivo: openBoundaries.py
 
 Esse programa le o arquivo data.npy que estive na mesma pasta que ele e resolve
@@ -14,80 +14,77 @@ Apos resolver a equacao, o arquivo salva os seguintes arquivos binarios:
     X.npy - Eixo x usado para os calculos que geraram a malha de U.npy
     Y.npy - Eixo y usado para os calculos que geraram a malha de U.npy
     V.npy - Velocidades usadas durante o calculo da malha de U.npy
-'''
-
+"""
 
 class interface(object):
-    '''
+    """
         Herda: object
         Define uma interface na forma de uma reta
-    '''
+    """
 
     def __init__(self, a, b):
-        '''
+        """
             Definicao de construtor
             Recebe:     a - coeficiente angular
                         b - termo independente
-        '''
+        """
         self.a = a
         self.b = b
 
     def __call__(self, x):
-        '''
+        """
             Definicao de funcao
             Recebe :    x - valor nas abscissas
             Retorna:    y - valor nas ordenadas para o valor x
-        '''
+        """
         return self.a * x + self.b
 
 
 class velocity(object):
-    '''
+    """
         Herda: object
         Define uma velocidade como uma funcao quadratica
-    '''
+    """
 
     def __init__(self, a=0., b=0., c=1.1):
-        '''
+        """
             Definicao de construtor
             Recebe:     a - Termo 'a' da funcao quadratica
                         b - Termo 'b' da funcao quadratica
                         c - Termo 'c' da funcao quadratica
-        '''
+        """
         self.a = a
         self.b = b
         self.c = c
 
     def getGradientVelocity(self, x, y):
-        '''
+        """
             Definicao de funcao
             Recebe:     x - valor nas abscissas
                         y - valor nas ordenadas
             Retorna:    y - valor da velocidade em (x, y)
-        '''
+        """
         return self.a * x + self.b * y + self.c
 
     def __call__(self, x, y):
-        '''
+        """
             Uma funcao call para uma classe permite que um objeto desta
             seja chamado como uma funcao. No caso de um objeto velocity ser
             chamado, ele retornara a velocidade v_type(x, y), sendo type o tipo
             de velocidade a ser retornada e derv a derivada da velocidade
-        '''
+        """
         return self.getGradientVelocity(x, y)
 
 # Criando a classe que define a onda 2D
-
-
 class wave2D(object):
-    '''
+    """
         Herda: object
         Define uma onda (por meio de algumas propriedades desta) em um ambiente
         bidimensional heterogeneo
-    '''
+    """
 
     def __init__(self, Lx, Ly, tMax, Mx, Ny, w, A, Xp, Yp, Tp):
-        '''
+        """
             Define um de ondas bidimensionais
             Recebe:     Lx - Comprimento do dominio em relacao ao eixo x
                         Ly - Comprimento do dominio em relacao ao eixo y
@@ -99,7 +96,7 @@ class wave2D(object):
                         Xp - Posicao em x do pico do pulso da fonte
                         Yp - Posicao em y do pico do pulso da fonte
                         Tp - Tempo do pico do pulso da fonte
-        '''
+        """
 
         self.Lx = 3 * Lx
         self.Ly = 3 * Ly
@@ -119,14 +116,14 @@ class wave2D(object):
         self.R = np.power(np.pi, 2) * np.power(self.w, 2)
 
     def evaluateFXYT(self, X, Y, T):
-        '''
+        """
             Funcao define a fonte da equacao da onda para os valores de
             X, Y e T. Atualmente, a fonte esta definida como uma wavelet Ricker
             Recebe:     X - array de valores no eixo das abscissas
                         Y - array de valores no eixo das ordenadas
                         T - array de valores no eixo temporal
             Retorna:    a funcao da wavelet Ricker
-        '''
+        """
         termoT = self.R * np.power(T-self.Tp, 2)
 
         D = np.power(X-self.Xp, 2) + np.power(Y-self.Yp, 2)
@@ -189,7 +186,7 @@ velocidades.append(velocity(vl[it.shape[0], 0],
 
 # Criando vetores X, Y, T
 X = np.linspace(-Onda2D.Lx / 3, 2 * Onda2D.Lx / 3, Onda2D.Mx)
-Y = np.linspace(-Onda2D.Ly / 3, 2 * Onda2D.Ly / 3, Onda2D.Ny)
+Y = np.linspace(0., Onda2D.Ly, Onda2D.Ny)
 T = np.linspace(0., Onda2D.tMax, Onda2D.Ot)
 
 # Recebendo matriz de velocidades
@@ -215,19 +212,26 @@ j = np.arange(1, int(Onda2D.Ny - 1))
 
 # Criando dx^2
 dx2 = Onda2D.dx * Onda2D.dx
+dy2 = Onda2D.dy * Onda2D.dy
+dt2 = Onda2D.dt * Onda2D.dt
 
 # Aplicando o MDF
 d = 2 * velocidades[ii, jj]
 c = 1 / (d * d)
 for k in range(1, Onda2D.Ot - 1):
-    U[ii, jj, k + 1] = c * (Onda2D.evaluateFXYT(X[ii], Y[jj], T[k]) -
-                            4. * U[ii, jj, k] + U[ii - 1, jj, k] + U[ii + 1, jj, k] +
-                            U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
+    # U[ii, jj, k + 1] = -U[ii, jj, k - 1] + U[ii, jj, k] + dt2 * dt2 * c * c * \
+    #                     ((U[ii - 1, jj, k] - 2. * U[ii, jj, k] + \
+    #                     U[ii + 1, jj, k]) / (dx2 * dx2)) + ((U[ii, jj - 1, k] -\
+    #                     2. * U[ii, jj, k] + U[ii, jj + 1, k]) / (dy2 * dy2)) + \
+    #                     dt2 * dt2 * Onda2D.evaluateFXYT(X[ii], Y[jj], T[k])
+    U[ii, jj, k + 1] = c * (Onda2D.evaluateFXYT(X[ii], Y[jj], T[k]) - \
+    4. * U[ii, jj, k] + U[ii - 1, jj, k] + U[ii + 1, jj, k] + \
+    U[ii, jj - 1, k] + U[ii, jj + 1, k]) - U[ii, jj, k - 1] + 2. * U[ii, jj, k]
 
 # Salvando arrays (um em cada arquivo, exceto o T, para evitar confusao)
 # TODO: em X e Y, salvar apenas a parte que deve aparecer no plot
-np.save('../data/open/X', X)
-np.save('../data/open/Y', Y)
-np.save('../data/open/U', U)
-np.save('../data/open/V', velocidades)
+np.save('../data/outputs/open/X', X)
+np.save('../data/outputs/open/Y', Y)
+np.save('../data/outputs/open/U', U)
+np.save('../data/outputs/open/V', velocidades)
 np.save('../data/configs/params', np.array([Onda2D.Lx / 3, Onda2D.Ly / 3]))

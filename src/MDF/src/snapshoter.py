@@ -16,9 +16,9 @@ else:
     exit()
 
 # Carregando arrays a partir de arquivos
-X = np.load('../data/{caminho}/X.npy'.format(caminho=camh))
-Y = np.load('../data/{caminho}/Y.npy'.format(caminho=camh))
-U = np.load('../data/{caminho}/U.npy'.format(caminho=camh))
+X = np.load('../data/outputs/{caminho}/X.npy'.format(caminho=camh))
+Y = np.load('../data/outputs/{caminho}/Y.npy'.format(caminho=camh))
+U = np.load('../data/outputs/{caminho}/U.npy'.format(caminho=camh))
 params = np.load('../data/configs/params.npy')
 
 print "Quantos snapshots voce deseja?"
@@ -45,8 +45,8 @@ ax = fig.add_subplot(111)
 markers = np.array([(0., 0.), (1.5, 1.9), (3., 2.3), (4., 3.8), (6.5, 8.)], dtype=(float, 2))
 
 # Colocando limites no plot
-plt.xlim(0., params[0])
-plt.ylim(0., params[1])
+plt.xlim(0., X.max())
+plt.ylim(0., Y.max())
 
 # Invertendo o eixo y
 plt.gca().invert_yaxis()
@@ -72,7 +72,7 @@ for i in range(h, U.shape[2], h):
     titulo = "Teste 0%d - MDF - 1D" % counter
 
     # Definindo caminho da plotagem
-    caminho = '../images/{caminho}/Teste0%d.png'.format(caminho=camh) % counter
+    caminho = '../data/images/{caminho}/Teste0%d.png'.format(caminho=camh) % counter
 
     # Incrementando o contador
     counter += 1
