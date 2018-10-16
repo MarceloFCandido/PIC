@@ -1,19 +1,19 @@
 import numpy as np
 
 """
-Arquivo: openBoundaries.py
+    Arquivo: openBoundaries.py
 
-Esse programa le o arquivo data.npy que estive na mesma pasta que ele e resolve
-a equacao da onda em um meio bidimensional nao-homogeneo
-(com condicoes de contorno "absorventes" - o dominio e expandido alem do campo
-de visao) para os parametros passados pelo arquivo data.npy pelo metodo de
-diferencas finitas
+    Esse programa le os arquivos de configuracao em ../data/configs/ e resolve
+    a equacao da onda em um meio bidimensional nao-homogeneo
+    (com condicoes de contorno 'absorventes') para os parametros
+    passados por esses arquivos pelo metodo de diferencas finitas.
 
-Apos resolver a equacao, o arquivo salva os seguintes arquivos binarios:
-    U.npy - Malha que representa a propagacao da onda 2D ao longo do tempo
-    X.npy - Eixo x usado para os calculos que geraram a malha de U.npy
-    Y.npy - Eixo y usado para os calculos que geraram a malha de U.npy
-    V.npy - Velocidades usadas durante o calculo da malha de U.npy
+    Apos resolver a equacao, o arquivo salva os seguintes arquivos binarios:
+        U.npy - Malha que representa a propagacao da onda 2D ao longo do tempo
+        X.npy - Eixo x usado para os calculos que geraram a malha de U.npy
+        Y.npy - Eixo y usado para os calculos que geraram a malha de U.npy
+        V.npy - Velocidades usadas durante o calculo da malha de U.npy
+    encontrados na pasta '../data/outputs/open/'.
 """
 
 class interface(object):

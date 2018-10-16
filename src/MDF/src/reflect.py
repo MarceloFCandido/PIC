@@ -171,9 +171,6 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
 #     A        Xp       Yp       Tp
     data[6], data[7], data[8], data[9])
 
-markers = np.zeros(len(interfaces), dtype=(float, 2))
-for i in range(len(interfaces)):
-    markers[i][:] = (interfaces[i].b, interfaces[i](Onda2D.Lx / 3))
 
 # Organizando dados das interfaces e das velocidades das camadas
 interfaces = []
@@ -183,6 +180,10 @@ for i in range(it.shape[0]):
     velocidades.append(velocity(vl[i, 0], vl[i, 1], vl[i, 2]))
 velocidades.append(velocity(vl[it.shape[0], 0], vl[it.shape[0], 1],
 vl[it.shape[0], 2]))
+
+markers = np.zeros(len(interfaces), dtype=(float, 2))
+for i in range(len(interfaces)):
+    markers[i][:] = (interfaces[i].b, interfaces[i](Onda2D.Lx / 3))
 
 # Recebendo matriz de velocidades
 velocidades = Onda2D.getVelocityMatrix(interfaces, velocidades)
