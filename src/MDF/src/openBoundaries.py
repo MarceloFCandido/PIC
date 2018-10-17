@@ -133,27 +133,55 @@ class wave2D(object):
         return self.A * np.exp(-termoT) * ((1 - 2 * termoD) * np.exp(-termoD))
 
     def getVelocityMatrix(self, interfaces, velocidades, X, Y):
-        # TODO: Criar docstring da funcao getVelocityMatrix
+        """
+            Funcao que constroi a matriz de velocidades com base nas informacoes
+            existentes sobre as interfaces e velocidades de cada camada que
+            constituem o meio de propagacao. Para tal, os arrays X e Y sao
+            usados como auxilio.
+            Recebe:                    interfaces  - lista de interfaces do meio
+                                       velocidades - lista de velocidades das
+                                                     camadas do meio
+                                       X           - array que representa o eixo
+                                                     x
+                                       Y           - array que representa o eixo
+                                                     y
+            Retorna:                   velocities  - matriz com as velocidades
+                                                     nos pontos (discretizados)
+                                                     do meio
+        """
         # Criando matriz de velocidades
         velocities = np.zeros((int(self.Mx), int(self.Ny)))
 
         # Preenchendo a matriz
         k = 0
-        # TODO: Comentar a funcao do getVelocityMatrix
         for i in range(0, int(self.Mx - 1)):
             # Definindo posicao x
             x = X[i]
             for j in range(0, int(self.Ny - 1)):
                 # Definindo posicao y
                 y = Y[j]
+                # Se a posicao em x esta dentro do dominio que sera exibido nos
+                # snapshots
                 if x >= 0. and x <= self.Lx / 3:
-                    if y >= 0.:
+                    if y >= 0.: # Se a posicao em y e maior que zero
+                        # Avaliando em qual das camadas o ponto (x, y) esta
                         while y > interfaces[k](x) and k < len(interfaces) - 1:
                             k += 1
+                        # Aplicando o valor da funcao velocidade da camada para
+                        # o ponto (x, y) na matriz
                         velocities[i, j] = velocidades[k](x, y)
+                    else:
+                        pass
+                # Caso o ponto esteja fora do dominio, calcular o valor da velo-
+                # cidade de acordo com o lado que o ponto esta e se ele passou
+                # da altura da interface no lado que ele esta
                 else:
-                    while y > interfaces[k].b and k < len(interfaces) - 1:
-                        k += 1
+                    if x < 0.:
+                        while y > interfaces[k].b and k < len(interfaces) - 1:
+                            k += 1
+                    elif x > self.Lx / 3:
+                        while y > interfaces[k](self.Lx / 3) and k < len(interfaces) - 1:
+                            k += 1
                     velocities[i, j] = velocidades[k](x, y)
                 # Para garantir que nao haja divisao por zero
                 if velocities[i, j] >= -.00005 and velocities[i, j] <= .00005:
@@ -174,7 +202,6 @@ Onda2D = wave2D(data[0], data[1], data[2], data[3], data[4], data[5],
                 #     A        Xp       Yp       Tp
                 data[6], data[7], data[8], data[9])
 
-# TODO: Organizando dados das interfaces e das velocidades das camadas
 interfaces = []
 velocidades = []
 for i in range(it.shape[0]):
