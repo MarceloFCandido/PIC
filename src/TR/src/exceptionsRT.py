@@ -28,10 +28,10 @@ class criticalAngle(Exception):
         , self.criticAngle, ")"
 
 class singularMatrix(Exception):
-    #TODO: Explicar qual o problema de uma matriz singular
     """
         Classe que define a excecao de existencia de matriz singular para um
-        determinado raio numa determinada camada
+        determinado raio numa determinada camada. Se a matriz e singular,
+        existem infinitas solucoes para ela, o que nao e desejado aqui.
     """
     def __init__(self, A):
         print "A seguinte matriz e singular: "
