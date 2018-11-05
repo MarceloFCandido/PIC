@@ -76,4 +76,11 @@ execução de `snapshoter.py`. Fronteiras abertas para o primeiro caminho,
 fronteiras reflexivas para o segundo.
 
 ### Código TR
+O tutorial de execução de código a seguir considera que o usuário está na pasta
+`./src/TR/src/` do repostório.
+
+O código TR não é organizado como o código MDF. Ou seja, ao invés de se ter um
+programa para os _inputs_, outro para cálculos e outro para plotagem, o código
+TR possui tudo isso de forma aglutinada.
+
 **A fazer**.
